@@ -1,7 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import Home from "./components/Home/Home"
+import Banner from "./components/Banner/Banner"
+import Navigation from './components/Navigation/Navigation';
 
 
 
@@ -28,20 +30,10 @@ function App() {
 
   return (
     <div className="App">
+      <Navigation />
+      <Banner />
       <header className="App-header">
-        <button onClick={() => console.log(APIData)}> </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {APIData}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Home />
       </header>
     </div>
   );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Home from "./components/Home/Home"
 import Banner from "./components/Banner/Banner"
 import Navigation from './components/Navigation/Navigation';
-
+import 'antd/dist/antd.css';
 
 
 
@@ -32,9 +32,7 @@ function App() {
     <div className="App">
       <Navigation />
       <Banner />
-      <header className="App-header">
-        <Home />
-      </header>
+      <Home />
     </div>
   );
 }

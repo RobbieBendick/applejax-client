@@ -10,7 +10,7 @@ function Navigation() {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse>
-                    <Nav>
+                    <Nav className="me-auto">
                         <NavDropdown title="Robdog">
                             <NavDropdown.Item href="/rob">rob</NavDropdown.Item>
                             <NavDropdown.Item href="/dog">dog</NavDropdown.Item>
@@ -18,9 +18,13 @@ function Navigation() {
                             <NavDropdown.Item href="/robdog">robdog</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    <Nav>
+                        <Nav.Link href="login">Login</Nav.Link>
+                        <Nav.Link eventKey={2} href="register">Register</Nav.Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
-    )
+    );
 }
 
 export default Navigation;

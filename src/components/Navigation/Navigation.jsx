@@ -1,12 +1,13 @@
 import "./Navigation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function Navigation() {
+    const goHome = () => window.location.pathname === "/" ? window.scrollTo(0,0) : window.location.pathname = "/";
+
     return (
             <Navbar bg="navColor" variant="dark" sticky="top" expand="xl" collapseOnSelect>
-                <Navbar.Brand style={{"padding": "10px 20px"}}>
+                <Navbar.Brand onClick={goHome} style={{"padding": "10px 30px", "cursor": "pointer"}}>
                     Rob
                 </Navbar.Brand>
                 <Navbar.Toggle />

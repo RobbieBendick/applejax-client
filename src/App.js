@@ -2,11 +2,10 @@ import './App.css';
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import Home from "./components/Home/Home"
-import Banner from "./components/Banner/Banner"
 import Navigation from './components/Navigation/Navigation';
+import Register from './components/Register/Register';
 import 'antd/dist/antd.css';
-
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   const [APIData, setAPIData] = useState(undefined)
@@ -29,11 +28,15 @@ function App() {
 
 
   return (
-    <div className="App">
-      <Navigation />
-      <Banner />
-      <Home />
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation />
+        <Switch>
+          <Route path="/" exact component={Home}/>
+          <Route path="/login" component={Register} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

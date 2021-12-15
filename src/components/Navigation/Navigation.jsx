@@ -1,6 +1,7 @@
 import "./Navigation.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Navigation() {
     return (
@@ -19,8 +20,8 @@ function Navigation() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="login">Login</Nav.Link>
-                        <Nav.Link eventKey={2} href="register">Register</Nav.Link>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/login">Register</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

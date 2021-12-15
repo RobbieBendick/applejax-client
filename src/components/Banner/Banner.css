@@ -1,7 +1,7 @@
 .banner {
   padding: 60px;
   text-align: center;
-  background: #1abc9c;
+  background: var(--main-bg-color-light);
   color: white;
   font-size: 30px;
 }

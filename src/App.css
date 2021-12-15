@@ -1,11 +1,3 @@
-:root {
-  --main-bg-color: #090c10;
-  --main-bg-color-inset: #0d1117;
-  --main-bg-color-light: #161b22;
-  --text-color-inset-primary: #c9d1d9;
-  --text-color-inset-secondary: #d8dfe7;
-}
-
 body {
   text-align: center;
   background-color: var(--main-bg-color) !important;

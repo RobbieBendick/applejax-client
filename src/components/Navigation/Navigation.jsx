@@ -22,7 +22,7 @@ function Navigation() {
                     </Nav>
                     <Nav>
                         <Nav.Link href="/login">Login</Nav.Link>
-                        <Nav.Link href="/login">Register</Nav.Link>
+                        <Nav.Link href="/register">Register</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

@@ -1,10 +1,12 @@
-import "./Register.css"
+import "./Login.css"
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from "axios";
 
-function Register() {
+function Login() {
     const onFinish = (values) => {
-        console.log("worked!", values);
+        axios.post("http://localhost:9000/login", {
+
+        })
     };
     
     const onFinishFailed = (errorInfo) => {
@@ -12,30 +14,25 @@ function Register() {
     };
 
     return (
+        <>
+        <label style={{"fontSize": "30px",}}>Login</label>
             <Form
             name="basic"
             labelCol={{ span: 2 }}
             wrapperCol={{ span: 6 }}
             initialValues={{ remember: true }}
-            onFinish={onFinish} 
+            onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             style={{"paddingTop": "30px"}}
-            action="/register"
-            method="POST"
             >
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: false, message: 'Please input your email!'}]}
-                >
-                    <Input />
-                </Form.Item>
+                
                 <Form.Item
                     label="Username"
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }, {pattern: /^[a-zA-Z0-9]+$/, message: 'Name can only include letters and numbers.',}]}
                 >
+
                     <Input />
                 </Form.Item>
                 <Form.Item
@@ -45,14 +42,18 @@ function Register() {
                 >
                     <Input.Password />
                 </Form.Item>
+                <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 0, span: 6 }}>
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
                 <Form.Item wrapperCol={{ offset: 0, span: 8 }}>
                     <Button type="primary" htmlType="submit">
                     Submit
                     </Button>
-                <a href="/login"><label style={{"padding": "15px 0 0 20px", "textDecoration": "underline", "cursor": "pointer"}}>Already have an account? click here</label></a>
+                    <a href="/register"><label style={{"padding": "15px 0 0 20px", "textDecoration": "underline", "cursor": "pointer"}}>Haven't created an account? click here</label></a>
                 </Form.Item>
             </Form>
+            </>
     );
 };
 
-export default Register;
+export default Login;

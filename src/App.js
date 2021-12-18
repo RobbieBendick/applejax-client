@@ -1,44 +1,55 @@
-import './App.css';
-import React, {useEffect, useState} from "react";
-import axios from 'axios';
-import Home from "./components/Home/Home"
-import Navigation from './components/Navigation/Navigation';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
-import 'antd/dist/antd.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { Client as Styletron } from "styletron-engine-atomic";
+import { Provider as StyletronProvider } from "styletron-react";
+import { DarkTheme, BaseProvider, styled } from "baseui";
+import { StatefulInput } from "baseui/input";
+
+// Import redux store.
+import store from "./redux/store";
+import AppContainer from "./AppContainer";
+
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
-  // const [APIData, setAPIData] = useState(undefined)
+  const engine = new Styletron();
+  const Centered = styled("div", {
+    alignItems: "center",
+    height: "100%",
+  });
 
-  // function callAPI() {
-  //   axios.get('http://localhost:9000/testAPI')
-  //   .then(response => {
-  //     // handle success
-  //     setAPIData(response.data);
-  //   })
-  //   .catch(error => {
-  //     // handle error
-  //     console.log(error);
-  //   })
-  // }
+  /*const [APIData, setAPIData] = useState(undefined);
 
-  // useEffect(() => {
-  //   callAPI();
-  // }, [])
+  function callAPI() {
+    axios
+      .get("http://localhost:9000/testAPI")
+      .then((response) => {
+        // handle success
+        setAPIData(response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+  }
 
+  useEffect(() => {
+    callAPI();
+  }, []);*/
 
   return (
-    <Router>
-      <div className="App">
-        <Navigation />
-        <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register}/>
-        </Switch>
-      </div>
-    </Router>
+    <StyletronProvider value={engine}>
+      <BaseProvider theme={DarkTheme}>
+        <Centered>
+          <Router>
+            <Provider store={store}>
+              <AppContainer />
+            </Provider>
+          </Router>
+        </Centered>
+      </BaseProvider>
+    </StyletronProvider>
   );
 }
 

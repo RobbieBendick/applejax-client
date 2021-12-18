@@ -1,6 +1,7 @@
 // Import pages.
-import Home from "../components/Home/index";
-import Register from "../components/Register/index";
+import Home from "../components/Home/";
+import Register from "../components/Register/";
+import Login from "../components/Login";
 
 export default [
   {
@@ -18,6 +19,18 @@ export default [
   {
     path: "/login",
     to: "/login",
+    name: "Login",
+
+    exact: true,
+    hasMenu: false,
+    restrictedRoute: false,
+    enabled: true,
+    component: Login,
+    permission: true,
+  },
+  {
+    path: "/register",
+    to: "/register",
     name: "Register",
 
     exact: true,

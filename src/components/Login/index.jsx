@@ -53,6 +53,7 @@ function Login() {
             label="Your username"
         >
             <Input
+            placeholder="Enter your username"
             id="username-input-id"
             value={values.username}
             onChange={e => setValues({...values, username: e.currentTarget.value})}
@@ -65,6 +66,7 @@ function Login() {
             label="Your password"
         >
             <Input
+            placeholder="Enter your password"
             id="password-input-id"
             value={values.password}
             onChange={e => setValues({...values, password: e.currentTarget.value})}

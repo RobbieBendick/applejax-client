@@ -22,7 +22,7 @@ function Negative() {
   );
 }
 
-function Login() {
+function Register() {
     const [values, setValues] = useState({
         email: "",
         username: "",
@@ -59,6 +59,7 @@ function Login() {
             }
         >
             <Input
+            placeholder="Enter your email"
             id="email-input-id"
             value={values.email}
             onChange={e => {
@@ -66,7 +67,7 @@ function Login() {
                 setIsValid({...isValid, email: validateEmail(e.currentTarget.value)});
                 console.log(values);
             }}
-            onBlur={e => setIsVisited({...isVisited, email: e.currentTarget.value})}
+            onBlur={e => setIsVisited({...isVisited, email: true})}
             error={shouldShowErrorEmail}
             overrides={shouldShowErrorEmail ? {After: Negative} : {}}
             type="email"
@@ -77,6 +78,7 @@ function Login() {
             label="Your username"
         >
             <Input
+            placeholder="Enter your username"
             id="username-input-id"
             value={values.username}
             onChange={e => setValues({...values, username: e.currentTarget.value})}
@@ -89,6 +91,7 @@ function Login() {
             label="Your password"
         >
             <Input
+            placeholder="Enter your password"
             id="password-input-id"
             value={values.password}
             onChange={e => setValues({...values, password: e.currentTarget.value})}
@@ -105,4 +108,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

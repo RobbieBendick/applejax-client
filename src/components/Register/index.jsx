@@ -1,58 +1,108 @@
-import "./Register.css"
-import { Form, Input, Button, Checkbox } from 'antd';
-import axios from "axios";
+import  * as React from 'react';
+import {useState} from "react";
+import {FormControl} from 'baseui/form-control';
+import {Input} from 'baseui/input';
+import {useStyletron} from 'baseui';
+import {Alert} from 'baseui/icon';
+import {Button} from 'baseui/button';
+import {validate as validateEmail} from 'email-validator';
+function Negative() {
+  const [css, theme] = useStyletron();
+  return (
+    <div
+      className={css({
+        display: 'flex',
+        alignItems: 'center',
+        paddingRight: theme.sizing.scale500,
+        color: theme.colors.negative400,
+      })}
+    >
+      <Alert size="22px" />
+    </div>
+  );
+}
 
-function Register() {
-    const onFinish = (values) => {
-        console.log("worked!", values);
-    };
+function Login() {
+    const [values, setValues] = useState({
+        email: "",
+        username: "",
+        password: ""
+    });
+
+    const [isValid, setIsValid] = useState({
+        email: false,
+        username: false,
+        password: false,
+    })
+    const [isVisited, setIsVisited] = useState({
+        email: false,
+        username: false,
+        password: false,
+    })
+  const shouldShowErrorEmail = !isValid.email && isVisited.email;
+  const [css, theme] = useStyletron();
+
+  return (
+        <>
+        <form className={css({
+            width: "50%",
+            margin: "0 auto",
+            paddingTop: "35px"
+        })} 
+        onSubmit={e => e.preventDefault()}>
+        <FormControl
+            label="Your email"
+            error={
+            shouldShowErrorEmail
+                ? 'Please input a valid email address'
+                : null
+            }
+        >
+            <Input
+            id="email-input-id"
+            value={values.email}
+            onChange={e => {
+                setValues({...values, email: e.currentTarget.value});
+                setIsValid({...isValid, email: validateEmail(e.currentTarget.value)});
+                console.log(values);
+            }}
+            onBlur={e => setIsVisited({...isVisited, email: e.currentTarget.value})}
+            error={shouldShowErrorEmail}
+            overrides={shouldShowErrorEmail ? {After: Negative} : {}}
+            type="email"
+            required
+            />
+        </FormControl>
+        <FormControl
+            label="Your username"
+        >
+            <Input
+            id="username-input-id"
+            value={values.username}
+            onChange={e => setValues({...values, username: e.currentTarget.value})}
+            onBlur={() => setIsVisited({ ...isVisited, username: true })}
+            type="username"
+            required
+            />
+        </FormControl>
+        <FormControl
+            label="Your password"
+        >
+            <Input
+            id="password-input-id"
+            value={values.password}
+            onChange={e => setValues({...values, password: e.currentTarget.value})}
+            onBlur={() => setIsVisited({...isVisited, password: true})}
+            type="password"
+            autoComplete="current-password"
+            required
+            />
+        </FormControl>
+        <Button type="submit">Register</Button>
+        </form>
+        </>
     
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
+  );
+}
 
-    return (
-            <Form
-            name="basic"
-            labelCol={{ span: 2 }}
-            wrapperCol={{ span: 6 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish} 
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            style={{"paddingTop": "30px"}}
-            action="/register"
-            method="POST"
-            >
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: false, message: 'Please input your email!'}]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }, {pattern: /^[a-zA-Z0-9]+$/, message: 'Name can only include letters and numbers.',}]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                    <Input.Password />
-                </Form.Item>
-                <Form.Item wrapperCol={{ offset: 0, span: 8 }}>
-                    <Button type="primary" htmlType="submit">
-                    Submit
-                    </Button>
-                <a href="/login"><label style={{"padding": "15px 0 0 20px", "textDecoration": "underline", "cursor": "pointer"}}>Already have an account? click here</label></a>
-                </Form.Item>
-            </Form>
-    );
-};
-
-export default Register;
+export default Login;

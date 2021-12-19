@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { DarkTheme, BaseProvider, styled } from "baseui";
-import { StatefulInput } from "baseui/input";
 
 // Import redux store.
 import store from "./redux/store";

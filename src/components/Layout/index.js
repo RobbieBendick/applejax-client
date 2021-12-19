@@ -39,7 +39,6 @@ const Layout = ({ children }) => {
             mainItems={mainItems}
             onMainItemSelect={(item) => {
               setMainItems((prev) => setItemActive(prev, item));
-              debugger;
               navigate(item.href);
             }}
             username=""
@@ -50,7 +49,7 @@ const Layout = ({ children }) => {
       </Layer>
       <Block
         height={["20px", "40px", "80px", "160px"]}
-        backgroundColor="primary200"
+        // backgroundColor="primary200"
         style={{ marginTop: "50px" }}
       >
         {children}

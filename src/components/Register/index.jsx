@@ -22,25 +22,30 @@ function Negative() {
   );
 }
 
-function Register() {
-    const [values, setValues] = useState({
-        email: "",
-        username: "",
-        password: ""
-    });
 
-    const [isValid, setIsValid] = useState({
-        email: false,
-        username: false,
-        password: false,
+
+function Register() {
+    const [formStateHolder, setFormStateHolder] = useState({
+        email: {
+            isValid: false,
+            isVisited: false,
+            value: "",
+        },
+        username: {
+            isValid: false,
+            isVisited: false,
+            value: "",
+        },
+        password: {
+            isValid: false,
+            isVisited: false,
+            value: "",
+        }
     })
-    const [isVisited, setIsVisited] = useState({
-        email: false,
-        username: false,
-        password: false,
-    })
-  const shouldShowErrorEmail = !isValid.email && isVisited.email;
+  const {email, username, password} = formStateHolder;
+  const shouldShowErrorEmail = !email.isValid && email.isVisited;
   const [css, theme] = useStyletron();
+
 
   return (
         <>
@@ -48,59 +53,57 @@ function Register() {
             width: "50%",
             margin: "0 auto",
             paddingTop: "35px"
-        })} 
-        onSubmit={e => e.preventDefault()}>
-        <FormControl
-            label="Your email"
-            error={
-            shouldShowErrorEmail
-                ? 'Please input a valid email address'
-                : null
-            }
-        >
-            <Input
-            placeholder="Enter your email"
-            id="email-input-id"
-            value={values.email}
-            onChange={e => {
-                setValues({...values, email: e.currentTarget.value});
-                setIsValid({...isValid, email: validateEmail(e.currentTarget.value)});
-                console.log(values);
-            }}
-            onBlur={e => setIsVisited({...isVisited, email: true})}
-            error={shouldShowErrorEmail}
-            overrides={shouldShowErrorEmail ? {After: Negative} : {}}
-            type="email"
-            required
-            />
-        </FormControl>
-        <FormControl
-            label="Your username"
-        >
-            <Input
-            placeholder="Enter your username"
-            id="username-input-id"
-            value={values.username}
-            onChange={e => setValues({...values, username: e.currentTarget.value})}
-            onBlur={() => setIsVisited({ ...isVisited, username: true })}
-            type="username"
-            required
-            />
-        </FormControl>
-        <FormControl
-            label="Your password"
-        >
-            <Input
-            placeholder="Enter your password"
-            id="password-input-id"
-            value={values.password}
-            onChange={e => setValues({...values, password: e.currentTarget.value})}
-            onBlur={() => setIsVisited({...isVisited, password: true})}
-            type="password"
-            autoComplete="current-password"
-            required
-            />
-        </FormControl>
+        })}
+            onSubmit={e => e.preventDefault()}>
+            <FormControl
+                label="Your email"
+                error={
+                shouldShowErrorEmail
+                    ? 'Please input a valid email address'
+                    : null
+                }
+            >
+                <Input
+                placeholder="Enter your email"
+                id="email-input-id"
+                value={email.value}
+                onChange={e => {
+                    setFormStateHolder({...formStateHolder, email: {...email, value: e.currentTarget.value}});
+                }}
+                onBlur={() => setFormStateHolder({...formStateHolder, email: {...email, isVisited: true}})}
+                error={shouldShowErrorEmail}
+                overrides={shouldShowErrorEmail ? {After: Negative} : {}}
+                type="email"
+                required
+                />
+            </FormControl>
+            <FormControl
+                label="Your username"
+            >
+                <Input
+                placeholder="Enter your username"
+                id="username-input-id"
+                value={username.value}
+                onChange={e => setFormStateHolder({...formStateHolder, username: {...username, value: e.currentTarget.value}})}
+                onBlur={() => setFormStateHolder({...formStateHolder, username: {...username, isVisited: true}})}
+                type="username"
+                required
+                />
+            </FormControl>
+            <FormControl
+                label="Your password"
+            >
+                <Input
+                placeholder="Enter your password"
+                id="password-input-id"
+                value={password.value}
+                onChange={e => setFormStateHolder({...formStateHolder, password: {...password, value: e.currentTarget.value}})}
+                onBlur={() => setFormStateHolder({...formStateHolder, password: {...password, isVisited: true}})}
+                type="password"
+                autoComplete="current-password"
+                required
+                />
+            </FormControl>
         <Button type="submit">Register</Button>
         </form>
         </>

@@ -5,7 +5,7 @@ import {Input} from 'baseui/input';
 import {useStyletron} from 'baseui';
 import {Alert} from 'baseui/icon';
 import {Button} from 'baseui/button';
-import {validate as validateEmail} from 'email-validator';
+
 function Negative() {
   const [css, theme] = useStyletron();
   return (

@@ -22,8 +22,6 @@ function Negative() {
   );
 }
 
-
-
 function Register() {
     const [formStateHolder, setFormStateHolder] = useState({
         email: {
@@ -41,7 +39,7 @@ function Register() {
             isVisited: false,
             value: "",
         }
-    })
+    });
   const {email, username, password} = formStateHolder;
   const shouldShowErrorEmail = !email.isValid && email.isVisited;
   const [css, theme] = useStyletron();
@@ -67,9 +65,7 @@ function Register() {
                 placeholder="Enter your email"
                 id="email-input-id"
                 value={email.value}
-                onChange={e => {
-                    setFormStateHolder({...formStateHolder, email: {...email, value: e.currentTarget.value}});
-                }}
+                onChange={e => setFormStateHolder({...formStateHolder, email: {...email, value: e.currentTarget.value, isValid: validateEmail(e.currentTarget.value)}})}
                 onBlur={() => setFormStateHolder({...formStateHolder, email: {...email, isVisited: true}})}
                 error={shouldShowErrorEmail}
                 overrides={shouldShowErrorEmail ? {After: Negative} : {}}

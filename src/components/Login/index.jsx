@@ -5,6 +5,7 @@ import {Input} from 'baseui/input';
 import {useStyletron} from 'baseui';
 import {Alert} from 'baseui/icon';
 import {Button} from 'baseui/button';
+import axios from "axios";
 
 function Negative() {
   const [css, theme] = useStyletron();
@@ -39,16 +40,26 @@ function Login() {
     })
   const [css, theme] = useStyletron();
 
+  // function loginAPICall() {
+  //   axios.post("http://localhost:9000/login", {
+  //     username: values.username,
+  //     password: values.password
+  //   }).then(res => console.log(res))
+  //   .catch(err => console.error(err))
+  // }
+
   return (
         <>
         <form
-            action="/login"
             className={css({
             width: "50%",
             margin: "0 auto",
             paddingTop: "35px"
         })} 
-        onSubmit={e => e.preventDefault()}>
+        onSubmit={e => {
+          e.preventDefault();
+          // loginAPICall();
+        }}>
         <FormControl
             label="Your username"
         >

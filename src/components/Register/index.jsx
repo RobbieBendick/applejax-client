@@ -6,6 +6,7 @@ import {useStyletron} from 'baseui';
 import {Alert} from 'baseui/icon';
 import {Button} from 'baseui/button';
 import {validate as validateEmail} from 'email-validator';
+import axios from 'axios';
 function Negative() {
   const [css, theme] = useStyletron();
   return (
@@ -41,9 +42,20 @@ function Register() {
         }
     });
   const {email, username, password} = formStateHolder;
-  const shouldShowErrorEmail = !email.isValid && email.isVisited;
+  const shouldShowErrorEmail = (!email.isValid && email.isVisited) && email.value.length > 0;
   const [css, theme] = useStyletron();
 
+  function registerApiCall() {
+    const {email, username, password} = formStateHolder;
+    axios.post("http://localhost:9000/register", {
+        email: email.value,
+        username: username.value,
+        password: password.value
+    }).then(response => console.log(response))
+    .catch(err => {
+        console.log(err);
+    });
+  }
 
   return (
         <>
@@ -52,7 +64,12 @@ function Register() {
             margin: "0 auto",
             paddingTop: "35px"
         })}
-            onSubmit={e => e.preventDefault()}>
+            onSubmit={
+                e => {
+                    e.preventDefault();
+                    registerApiCall();
+                }
+            }>
             <FormControl
                 label="Your email"
                 error={
